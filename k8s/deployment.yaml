@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-client
+  labels:
+    app: apache-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache-client
+  template:
+    metadata:
+      labels:
+        app: apache-client
+    spec:
+      containers:
+        - name: apache
+          image: TU_DOCKER_USER/apache-client:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10

@@ -1,0 +1,17 @@
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  usar-receta-compartida:
+    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+    with:
+      image-name: apache-client
+      image-tag: ${{ github.ref_name }}
+      k3s-server-public-ip: ${{ vars.K3S_SERVER_PUBLIC_IP }}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
+      EA2_SSH_PRIVATE_KEY: ${{ secrets.EA2_SSH_PRIVATE_KEY }}
