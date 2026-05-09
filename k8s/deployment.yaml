@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: apache
-          image: TU_DOCKER_USER/apache-client:latest
+          image: aleavilac/apache-client:latest
           imagePullPolicy: Always
           ports:
             - name: http
